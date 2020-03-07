@@ -5,17 +5,21 @@ var fileupload = require("express-fileupload");
 const fs = require('fs');
 const pdf = require('pdf-parse');
 
-var resultado = "";
-
 var pathFile = "";
 app.use(fileupload());
 
+app.set("port", process.env.PORT || "3000");
+
 app.get("/", (req, res, next)=> {
-    res.status(200).send("Hola Mundoo!!!");
+    res.status(200).send("Control de Existencias - Andina Argentina.");
 })
 
-app.post("/upload", (req, res, next) => {
-    const file = req.files.photo;
+app.get("/api", (req, res, next)=> {
+    res.status(200).send("Control de Existencias - Andina Argentina, utilice POS");
+})
+
+app.post("/api/upload", (req, res, next) => {
+    const file = req.files.pdfupdated;
     pathFile = "./upload/" + file.name
     file.mv(pathFile, (err, result)=> {
         if (err) {
@@ -32,11 +36,11 @@ app.post("/upload", (req, res, next) => {
     });
 })
 
-app.listen(3000, ()=> {
+app.listen(app.get("port"), ()=> {
     console.log("Servidor funcionando en el puerto 3000");
 })
 
-function readPdf(pathDir){
+function readPdf(pathDir, response){
     //let dataBuffer = fs.readFileSync('path to PDF file...');
     let dataBuffer = fs.readFileSync(pathDir);
     pdf(dataBuffer).then((data)=> {
