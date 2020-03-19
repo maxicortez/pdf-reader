@@ -37,7 +37,7 @@ app.post("/api/upload", (req, res, next) => {
     try {
         const file = req.files.pdfupdated;
         //pathFile = path.join(__dirname, "/upload/", file.name);
-        pathFile = path.join(__dirname,"upload", file.name);
+        pathFile = "./upload/" + file.name;
         file.mv(pathFile, (err)=> {
             if (err) {
                 throw err;
