@@ -35,7 +35,8 @@ app.get("/api/upload", (req, res, next)=> {
 app.post("/api/upload", (req, res, next) => {
     try {
         const file = req.files.pdfupdated;
-        pathFile = path.join(__dirname, "/upload/", file.name);
+        //pathFile = path.join(__dirname, "/upload/", file.name);
+        pathFile = path.join("./upload/", file.name);
         file.mv(pathFile, (err)=> {
             if (err) {
                 throw err;
@@ -48,7 +49,7 @@ app.post("/api/upload", (req, res, next) => {
                     }
                 })
                 res.status(200).json({ "Respuesta": data.text.split("\n"), 
-                    "File": "file.name", 
+                    "File": file.name, 
                     "Autor": "Maximiliano Cortez"                    
                 });                
             }).catch((err)=> {
