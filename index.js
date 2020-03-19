@@ -28,7 +28,8 @@ app.get("/api", (req, res, next)=> {
 app.get("/api/upload", (req, res, next)=> {
     res.status(200).json({ 
         "Respuesta": "API/UPLOAD PDF AND READ CAE - Control de Existencias - Andina Argentina", 
-        "Autor": "Maximiliano Cortez"
+        "Autor": "Maximiliano Cortez", 
+        "App Path": path.join(__dirname,"upload", "Nombre de archivo.pdf")
     });
 })
 
