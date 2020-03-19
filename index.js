@@ -26,11 +26,22 @@ app.get("/api", (req, res, next)=> {
 });
 
 app.get("/api/upload", (req, res, next)=> {
-    res.status(200).json({ 
-        "Respuesta": "API/UPLOAD PDF AND READ CAE - Control de Existencias - Andina Argentina", 
-        "Autor": "Maximiliano Cortez", 
-        "App Path": path.join(__dirname,"upload")
-    });
+    try {
+        var r;
+        if (fs.existsSync(path.join(__dirname,"upload"))) {
+            r = path.join(__dirname,"upload");
+        } else {
+            r = "Directorio inexistente";
+        };
+
+        res.status(200).json({ 
+            "Respuesta": "API/UPLOAD PDF AND READ CAE - Control de Existencias - Andina Argentina", 
+            "Autor": "Maximiliano Cortez", 
+            "App Path": r
+        });    
+    } catch(err){
+        res.statur(400).json({ "Error": err});
+    }
 })
 
 app.post("/api/upload", (req, res, next) => {
