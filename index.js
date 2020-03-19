@@ -31,7 +31,8 @@ app.get("/api/upload", (req, res, next)=> {
         if (fs.existsSync(path.join(__dirname,"upload"))) {
             r = path.join(__dirname,"upload");
         } else {
-            r = "Directorio inexistente";
+            fs.mkdirSync(path.join(__dirname,"upload"))
+            r = "Directorio inexistente: creado correctamente";
         };
 
         res.status(200).json({ 
