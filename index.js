@@ -19,7 +19,7 @@ app.get("/", (req, res, next)=> {
 
 app.get("/api", (req, res, next)=> {
     res.status(200).json({ 
-        "Respuesta": "APIS - Control de Existencias - Andina Argentina", 
+        "Respuesta": "API - Control de Existencias - Andina Argentina", 
         "Autor": "Maximiliano Cortez"
     });
 });
